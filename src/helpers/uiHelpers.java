@@ -11,15 +11,15 @@ public class uiHelpers {
     public static WebElement findAnyElement(WebDriver driver, String elementSelector, String selectorType){
         WebElement foundElement;
         WebDriverWait wait = new WebDriverWait(driver, 10);
-        switch (elementSelector) {
+        switch (selectorType) {
             case "xpath":
-                foundElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(elementSelector)));
+                foundElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(elementSelector)));
                 break;
             case "id":
-                foundElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(elementSelector)));
+                foundElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.id(elementSelector)));
                 break;
             default:
-                foundElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(elementSelector)));
+                foundElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(elementSelector)));
                 break;
         }
         return foundElement;
