@@ -3,21 +3,23 @@ package helpers;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class uiHelpers {
     //A generic function to find any element.
     public static WebElement findAnyElement(WebDriver driver, String elementSelector, String selectorType){
         WebElement foundElement;
+        WebDriverWait wait = new WebDriverWait(driver, 10);
         switch (elementSelector) {
             case "xpath":
-                foundElement = driver.findElement(By.xpath(elementSelector));
+                foundElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(elementSelector)));
                 break;
             case "id":
-                foundElement = driver.findElement(By.id(elementSelector));
+                foundElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(elementSelector)));
                 break;
             default:
-                foundElement = driver.findElement(By.xpath(elementSelector));
+                foundElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(elementSelector)));
                 break;
         }
         return foundElement;
