@@ -1,16 +1,19 @@
 package controllers;
 
+import helpers.uiHelpers;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
 import models.userModel;
 import helpers.configurationHelper;
-import org.openqa.selenium.WebDriver;
 
 import java.io.IOException;
 import java.util.Properties;
 
+import static controllers.dashboardActivity_Controller.tabOnBeesClass;
 import static models.userModel.*;
 
 public class testCaseController {
-    public static boolean runCase1(WebDriver appium) throws IOException {
+    public static boolean runCase1(AppiumDriver<MobileElement> appium) throws IOException, InterruptedException {
         // ** Step 1: Fill in and Submit login form ** //
         //Prepare login form's data
         Properties properties;
@@ -35,6 +38,30 @@ public class testCaseController {
             System.out.println("Form submission failed.");
             return false;
         }
+
+        //Time to load the dashboard 10 secconds to load the info
+        Thread.sleep(10000);
+
+        //Scroll to find the beesClass on UI
+        uiHelpers.scrollScreen(appium);
+
+        // Time to Load the available classes.
+        Thread.sleep(10000);
+
+        //Step 2 Tab on beesClass from dashboard classes
+        boolean beesClassTabAction = tabOnBeesClass(appium);
+        if (!beesClassTabAction){
+            System.out.println("Tabbing on beesClass failed.");
+            return false;
+        }
+
+        // Time to load the class's info
+        Thread.sleep(10000);
+
+        //Scroll to find Sarah Smith Child
+        uiHelpers.scrollScreen(appium);
+
+        //ToDo: Step 3 Tab on Sarah Smith from children
 
         return true;
     }
