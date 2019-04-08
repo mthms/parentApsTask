@@ -64,7 +64,7 @@ public class testCaseController {
         // Time to load the checkedIn children
         Thread.sleep(10000);
 
-        //Step 3 Tab on Sarah Smith from children and go to the profile
+        //**Step 3 Tab on Sarah Smith from children**//
         boolean sarahSmithTabAction = beesClassActivity_Controller.tabOnSarahSmith(appium);
         if (!sarahSmithTabAction) {
             System.out.println("Tabbing on SarahSmith Failed.");
@@ -74,12 +74,39 @@ public class testCaseController {
         //Time to load the profile menu
         Thread.sleep(2000);
 
+        //**Step 4 Tab on Profile button.**//
         boolean profileButtonTabAction = beesClassActivity_Controller.tabOnProfileButton(appium);
         if (!profileButtonTabAction) {
             System.out.println("Tabbing on profile button failed.");
             return false;
         }
 
+        //**Step 5 Tab on edit button.**//
+        boolean editLinkTabAction = profileActivity_Controller.tabOnEditButton(appium);
+        if (!editLinkTabAction) {
+            System.out.println("Tabbing on the edit link failed.");
+            return false;
+        }
+
+        //Time to load the child's editView
+        Thread.sleep(2000);
+
+        uiHelpers.scrollScreen(appium);
+
+        //Time to load the child's editView
+        Thread.sleep(2000);
+
+        //**Step 6 edit the birthPlace**//
+        boolean birthPlaceEditField = profileActivity_Controller.editBirthPlace(appium, "Cairo");
+        if (!birthPlaceEditField) {
+            System.out.println("Editing the birth place failed.");
+            return false;
+        }
+        boolean saveButtonTabAction = profileActivity_Controller.saveProfileInfo(appium);
+        if (!saveButtonTabAction) {
+            System.out.println("Saving the information failed.");
+            return false;
+        }
         return true;
     }
 }
