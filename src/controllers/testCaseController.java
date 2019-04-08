@@ -61,7 +61,24 @@ public class testCaseController {
         //Scroll to find Sarah Smith Child
         uiHelpers.scrollScreen(appium);
 
-        //ToDo: Step 3 Tab on Sarah Smith from children
+        // Time to load the checkedIn children
+        Thread.sleep(10000);
+
+        //Step 3 Tab on Sarah Smith from children and go to the profile
+        boolean sarahSmithTabAction = beesClassActivity_Controller.tabOnSarahSmith(appium);
+        if (!sarahSmithTabAction) {
+            System.out.println("Tabbing on SarahSmith Failed.");
+            return false;
+        }
+
+        //Time to load the profile menu
+        Thread.sleep(2000);
+
+        boolean profileButtonTabAction = beesClassActivity_Controller.tabOnProfileButton(appium);
+        if (!profileButtonTabAction) {
+            System.out.println("Tabbing on profile button failed.");
+            return false;
+        }
 
         return true;
     }

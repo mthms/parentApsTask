@@ -14,7 +14,7 @@ public class uiHelpers {
     //A generic function to find any element.
     public static WebElement findAnyElement(WebDriver driver, String elementSelector, String selectorType){
         WebElement foundElement;
-        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebDriverWait wait = new WebDriverWait(driver, 120);
         switch (selectorType) {
             case "xpath":
                 foundElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(elementSelector)));
