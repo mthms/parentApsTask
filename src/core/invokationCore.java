@@ -1,9 +1,10 @@
 package core;
 
 import helpers.configurationHelper;
-import org.openqa.selenium.*;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
+import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.io.IOException;
 import java.net.URL;
@@ -11,8 +12,8 @@ import java.util.Properties;
 
 public class invokationCore{
     //A generic function to be configured for iOS and Android
-    public static WebDriver invokeAppium() throws IOException {
-        WebDriver appium;
+    public static AppiumDriver<MobileElement> invokeAppium() throws IOException {
+        AppiumDriver<MobileElement> appium;
 
         //Calling configuration manager to return an object of the configuration file.
         Properties properties = configurationHelper.getConfig();
@@ -28,7 +29,9 @@ public class invokationCore{
         desiredCapabilities.setCapability("app", properties.getProperty("app"));
 
         //Connecting the desired capabilities with the appium server.
-        appium = new RemoteWebDriver(new URL(properties.getProperty("appiumDriverUrl")), desiredCapabilities);
+
+        appium = new AndroidDriver<MobileElement>(new URL(properties.getProperty("appiumDriverUrl")), desiredCapabilities);
+
         return appium;
     }
 }
